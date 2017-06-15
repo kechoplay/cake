@@ -21608,3 +21608,61 @@ Stack Trace:
 #16 {main}
 
 
+2017-06-15 22:49:16 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakephp.categories' doesn't exist
+Request URL: /
+Stack Trace:
+#0 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(97): Cake\Database\Schema\Collection->_reflect('Column', 'categories', Array, Object(Cake\Database\Schema\TableSchema))
+#1 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(63): Cake\Database\Schema\Collection->describe('categories', Array)
+#2 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Table.php(532): Cake\Database\Schema\CachedCollection->describe('categories')
+#3 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Query.php(210): Cake\ORM\Table->getSchema()
+#4 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Query.php(167): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\CategoriesTable))
+#5 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Table.php(1570): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\CategoriesTable))
+#6 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Table.php(1172): Cake\ORM\Table->query()
+#7 D:\program\xampp\htdocs\cake\src\Model\Table\CategoriesTable.php(90): Cake\ORM\Table->find('all')
+#8 D:\program\xampp\htdocs\cake\src\Controller\HomeController.php(20): App\Model\Table\CategoriesTable->getAll()
+#9 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\HomeController->index('home')
+#10 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#11 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomeController))
+#12 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\BaseApplication.php(78): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#14 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(59): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#15 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#16 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#17 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#18 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#19 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#20 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#21 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Server.php(82): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#22 D:\program\xampp\htdocs\cake\webroot\index.php(37): Cake\Http\Server->run()
+#23 {main}
+
+
+2017-06-15 22:59:02 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cakephp.categories' doesn't exist
+Request URL: /
+Stack Trace:
+#0 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(97): Cake\Database\Schema\Collection->_reflect('Column', 'categories', Array, Object(Cake\Database\Schema\TableSchema))
+#1 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(63): Cake\Database\Schema\Collection->describe('categories', Array)
+#2 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Table.php(532): Cake\Database\Schema\CachedCollection->describe('categories')
+#3 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Query.php(210): Cake\ORM\Table->getSchema()
+#4 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Query.php(167): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\CategoriesTable))
+#5 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Table.php(1570): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\CategoriesTable))
+#6 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\ORM\Table.php(1172): Cake\ORM\Table->query()
+#7 D:\program\xampp\htdocs\cake\src\Model\Table\CategoriesTable.php(90): Cake\ORM\Table->find('all')
+#8 D:\program\xampp\htdocs\cake\src\Controller\HomeController.php(20): App\Model\Table\CategoriesTable->getAll()
+#9 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\HomeController->index('home')
+#10 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#11 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomeController))
+#12 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\BaseApplication.php(78): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#14 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(59): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#15 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#16 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#17 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#18 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#19 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#20 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#21 D:\program\xampp\htdocs\cake\vendor\cakephp\cakephp\src\Http\Server.php(82): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#22 D:\program\xampp\htdocs\cake\webroot\index.php(37): Cake\Http\Server->run()
+#23 {main}
+
+

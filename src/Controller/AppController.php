@@ -41,6 +41,9 @@ class AppController extends Controller
     {
         parent::initialize();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $this->viewBuilder()->setLayout('default2');
+        $lstCategory=$this->_categorysTbl->getAll();
+        $this->set(compact('lstCategory'));
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
@@ -97,6 +100,31 @@ class AppController extends Controller
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
+        }
+    }
+
+    public function getCategory($data,$parent=0)
+    {
+        $cate_chil=array();
+        foreach ($data as $key => $value)
+        {
+            if($value['parent_id']==$parent){
+                $cate_chil[]=$value;
+            }
+        }
+        if ($cate_chil)
+        {
+            foreach ($cate_chil as $keys => $values)
+            {
+                echo "<li class='list-group-item menu1'>";
+                echo "<a href='".$this->Url->build(['controller'=>'categories','action'=>'view',$values['cate_id']])."' >";
+                echo $values['cate_name'];
+                echo "</a>";
+                echo "</li>";
+                echo "<ul>";
+                getCategory($data,$values['cate_id']);
+                echo "</ul>";
+            }
         }
     }
 }
