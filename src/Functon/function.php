@@ -10,8 +10,6 @@ function getCategory($data,$parent=0)
             $cate_chil[]=$value;
         }
     }
-//    echo "<pre>";
-//    print_r($data);
     if ($cate_chil)
     {
         foreach ($cate_chil as $keys => $values)

@@ -53,11 +53,11 @@ class CategoriesController extends AppController
         foreach ($children as $key => $val) {
             $id1 = $val['cate_id'];
             $children1[] = $this->Categories->getChild($id1);
-            echo "<pre>";
-            print_r($children1);
-            echo "</pre>";
+//            echo "<pre>";
+//            print_r($children1);
+//            echo "</pre>";
         }
-        die;
+//        die;
 
         $this->set('category', $category);
         $this->set('children1', $children1);
