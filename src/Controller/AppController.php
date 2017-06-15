@@ -56,8 +56,8 @@ class AppController extends Controller
                 ]
             ],
             'loginAction' => array('controller' => 'Users', 'action' => 'login'),
-            'loginRedirect' => array('controller' => 'Admin', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'Home', 'action' => 'index'),
+            'loginRedirect' => array('controller' => 'Admin/Users', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
         ]);
 
 //        $redirect_url=$this->request->here;

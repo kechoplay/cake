@@ -45,7 +45,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <h1><a href=""><?= $this->fetch('title') ?></a></h1>
         </li>
         <li class="name">
-            <h1><?php echo $this->Html->link('Admin',['controller'=>'Admin','action'=>'index']) ?></h1>
+            <h1><?php echo $this->Html->link('Admin',['controller'=>'Users','action'=>'index']) ?></h1>
         </li>
         <li class="name">
             <h1><?php echo $this->Html->link('Category',['controller'=>'Categories','action'=>'index']) ?></a></h1>

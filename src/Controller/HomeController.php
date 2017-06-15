@@ -17,20 +17,7 @@ class HomeController extends AppController
 
     public function index()
     {
-        $parent=$this->_categorysTbl->getParent();
-
-
-        $lstCategory=$this->_categorysTbl->treeListCategory();
-        foreach ($lstCategory as $cat){
-            var_dump($cat);
-            die();
-        }
-
-//        $chil=$this->_categorysTbl->getChild($value['cat_id']);
-        $article=$this->_articleTbl->showCategory();
-        $this->set(compact('article'));
-        $this->set(compact('parent'));
-        $this->set(compact('getca'));
+        $lstCategory=$this->_categorysTbl->getAll();
         $this->set(compact('lstCategory'));
     }
 }

@@ -8,8 +8,8 @@ use Cake\ORM\Entity;
  *
  * @property int $cate_id
  * @property int $parent_id
- * @property int $cate_lft
- * @property int $cate_rght
+ * @property int $lft
+ * @property int $rght
  * @property string $cate_name
  *
  * @property \App\Model\Entity\Category $category

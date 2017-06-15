@@ -80,4 +80,14 @@ class CategoriesTableTest extends TestCase
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
+
+    /**
+     * Test getAll method
+     *
+     * @return void
+     */
+    public function testGetAll()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
 }

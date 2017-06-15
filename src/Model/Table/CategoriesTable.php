@@ -5,7 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\TableRegistry;
 
 /**
  * Categories Model
@@ -21,6 +20,8 @@ use Cake\ORM\TableRegistry;
  * @method \App\Model\Entity\Category patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Category[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Category findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TreeBehavior
  */
 class CategoriesTable extends Table
 {
@@ -31,22 +32,27 @@ class CategoriesTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-
     public function initialize(array $config)
     {
         parent::initialize($config);
 
-        $this->addBehavior('Tree');
-
-//        $categories->recover();
-//        $list = $categories->find('treeList');
         $this->table('categories');
         $this->displayField('cate_name');
         $this->primaryKey('cate_id');
 
+        $this->addBehavior('Tree');
+
         $this->belongsTo('Categories', [
             'foreignKey' => 'cate_id',
             'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('ParentCategories', [
+            'className' => 'Categories',
+            'foreignKey' => 'parent_id'
+        ]);
+        $this->hasMany('ChildCategories', [
+            'className' => 'Categories',
+            'foreignKey' => 'parent_id'
         ]);
     }
 
@@ -58,14 +64,6 @@ class CategoriesTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->integer('lft')
-            ->allowEmpty('lft');
-
-        $validator
-            ->integer('rght')
-            ->allowEmpty('rght');
-
         $validator
             ->allowEmpty('cate_name');
 
@@ -82,36 +80,22 @@ class CategoriesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['cate_id'], 'Categories'));
-
+        $rules->add($rules->existsIn(['parent_id'], 'ParentCategories'));
 
         return $rules;
     }
-
-    public function getParent()
-    {
-        return $this->find('all')
-            ->where(['parent_id'=>0])
-            ->toArray();
-    }
-
-
 
     public function getAll()
     {
         return $this->find('all')->toArray();
     }
 
-    public function getChild($child=null)
+    public function getChild($id)
     {
         return $this->find('all')
-            ->where(['parent_id'=>$child])
+            ->where(['parent_id'=>$id])
             ->toArray();
     }
 
-    public function treeListCategory()
-    {
-        $list = $this->find('children', ['for' => 1]);
-        return $list;
 
-    }
 }

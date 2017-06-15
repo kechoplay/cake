@@ -23,6 +23,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
 <?php echo $this->element('layout/header') ?>
+<div class="col-md-3 ">
+    <ul class="list-group" id="menu">
+        <li href="#" class="list-group-item menu1 active">
+            Menu
+        </li>
+        <?php
+        //        echo "<pre>";
+        //        print_r($lstCategory);
+        getCategory($lstCategory);
+        ?>
+
+    </ul>
+</div>
 <?php echo $this->fetch('content') ?>
 <?php echo $this->element('layout/footer') ?>
 <script>
