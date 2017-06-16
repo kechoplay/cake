@@ -1,6 +1,7 @@
 <?php
 use Cake\Datasource\ConnectionManager;
-
+use App\View\AppView;
+use Cake\Routing\Router;
 function getCategory($data,$parent=0)
 {
     $cate_chil=array();
@@ -15,7 +16,11 @@ function getCategory($data,$parent=0)
         foreach ($cate_chil as $keys => $values)
         {
             echo "<li class='list-group-item menu1'>";
-            echo "<a href='categories/view/".$values['cate_id']."' >";
+            if ($values['parent_id']!=0) {
+                echo "<a href='" . Router::url(['controller' => 'Categories', 'action' => 'view', $values['cate_id']]) . "'>";
+            }else{
+                echo "<a>";
+            }
             echo $values['cate_name'];
             echo "</a>";
             echo "</li>";

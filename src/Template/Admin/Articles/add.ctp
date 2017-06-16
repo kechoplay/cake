@@ -15,13 +15,21 @@
 </nav>
 <div class="articles form large-9 medium-8 columns content">
     <?= $this->Form->create($article) ?>
+
     <fieldset>
         <legend><?= __('Add Article') ?></legend>
         <?php
             echo $this->Form->input('arc_name');
-            echo $this->Form->input('arc_descript');
-            echo $this->Form->input('cate_id', ['options' => $categories, 'empty' => true]);
+            echo $this->Form->input('arc_descript',['type'=>'textarea','maxlenght'=>'1000']);
+//            echo $this->Form->input('cate_id', ['options' => $categories, 'empty' => true]);
         ?>
+        Category
+        <select name="cate_id">
+            <option value="0">Vui lòng chọn danh mục</option>
+            <?php
+            lstCategory($lstCategory);
+            ?>
+        </select>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>

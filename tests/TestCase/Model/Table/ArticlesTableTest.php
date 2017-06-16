@@ -81,34 +81,4 @@ class ArticlesTableTest extends TestCase
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
-
-    /**
-     * Test showCategory method
-     *
-     * @return void
-     */
-    public function testShowCategory()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test create method
-     *
-     * @return void
-     */
-    public function testCreate()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test update method
-     *
-     * @return void
-     */
-    public function testUpdate()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
 }

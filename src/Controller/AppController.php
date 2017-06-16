@@ -16,6 +16,9 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use App\View\AppView;
+use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 
 /**
  * Application Controller
@@ -41,31 +44,50 @@ class AppController extends Controller
     {
         parent::initialize();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $this->viewBuilder()->setLayout('default2');
-        $lstCategory=$this->_categorysTbl->getAll();
-        $this->set(compact('lstCategory'));
+        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix']!='admin'){
+            $this->viewBuilder()->setLayout('default2');
+        }else {
+            $this->viewBuilder()->setLayout('default');
+        }
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Paginator');
-        $this->loadComponent('Auth',[
-            'authenticate' =>[
-                'Form' =>[
-                    'fields' =>[
-                        'username' =>'username',
-                        'password' =>'password'
-                    ],
-                    'userModel' => 'Users'
-                ]
-            ],
-            'loginAction' => array('controller' => 'Users', 'action' => 'login'),
-            'loginRedirect' => array('controller' => 'Admin/Users', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
-        ]);
+        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix']!='admin') {
+            $this->loadComponent('Auth', [
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'username',
+                            'password' => 'password'
+                        ],
+                        'userModel' => 'Users'
+                    ]
+                ],
+                'loginAction' => array('controller' => 'Users', 'action' => 'login'),
+                'loginRedirect' => array('controller' => 'Admin/Users', 'action' => 'index'),
+                'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
+            ]);
+        }else{
+            $this->loadComponent('Auth', [
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'username',
+                            'password' => 'password'
+                        ],
+                        'userModel' => 'Users'
+                    ]
+                ],
+//                'loginAction' => array('controller' => 'Admin/Users', 'action' => 'login'),
+                'loginRedirect' => array('controller' => 'Users', 'action' => 'index'),
+                'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
+            ]);
+        }
 
-//        $redirect_url=$this->request->here;
-//        $arr=explode('/',$redirect_url);
-//        $this->set('module',$arr[1]);
+        $redirect_url=$this->request->here;
+        $arr=explode('/',$redirect_url);
+        $this->set('module',$arr[1]);
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -86,6 +108,9 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['index','view','display']);
+        $tblCategory=TableRegistry::get('Categories');
+        $lstCategory=$tblCategory->find('all')->toArray();
+        $this->set(compact('lstCategory'));
     }
 
     /**
@@ -117,7 +142,7 @@ class AppController extends Controller
             foreach ($cate_chil as $keys => $values)
             {
                 echo "<li class='list-group-item menu1'>";
-                echo "<a href='".$this->Url->build(['controller'=>'categories','action'=>'view',$values['cate_id']])."' >";
+                echo "<a href='".Router::url(['controller'=>'Categories','action'=>'view',$values['cate_id']])."'>";
                 echo $values['cate_name'];
                 echo "</a>";
                 echo "</li>";

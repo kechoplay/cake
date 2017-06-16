@@ -33,7 +33,6 @@ class ArticlesTable extends Table
     {
         parent::initialize($config);
 
-
         $this->table('articles');
         $this->displayField('arc_id');
         $this->primaryKey('arc_id');
@@ -78,10 +77,5 @@ class ArticlesTable extends Table
         $rules->add($rules->existsIn(['cate_id'], 'Categories'));
 
         return $rules;
-    }
-
-    public function showCategory()
-    {
-        return $this->find('all')->toArray();
     }
 }

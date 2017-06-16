@@ -29,7 +29,7 @@
                 <td><?= $article->has('article') ? $this->Html->link($article->article->arc_id, ['controller' => 'Articles', 'action' => 'view', $article->article->arc_id]) : '' ?></td>
                 <td><?= h($article->arc_name) ?></td>
                 <td><?= h($article->arc_descript) ?></td>
-                <td><?= $article->has('category') ? $this->Html->link($article->category->cate_id, ['controller' => 'Categories', 'action' => 'view', $article->category->cate_id]) : '' ?></td>
+                <td><?= $article->has('category') ? $this->Html->link($article->category->cate_name, ['controller' => 'Categories', 'action' => 'view', $article->category->cate_id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $article->arc_id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $article->arc_id]) ?>

@@ -1,45 +1,72 @@
-<?php
-/**
-  * @var \App\View\AppView $this
-  */
+<style>
+    .break {
+        clear: both;
+        height: 10px;
+        width: 90%;
+        margin: auto;
+        border-bottom: 1px solid #EEEEEE;
+    }
+</style>
 
-?>
-
-<div class="col-md-9">
+<div class="col-md-9 ">
     <div class="panel panel-default">
-        <div class="panel-heading" style="background-color:#337AB7; color:white;" >
-            <h2 style="margin-top:0px; margin-bottom:0px;"> <?=$category->cate_name?></h2>
+        <div class="panel-heading" style="background-color:#337AB7; color:white;">
+            <h4><b><?=$category->cate_name?></b></h4>
         </div>
+        <?php
+        if (!empty($article)) {
+            foreach ($article as $value) {
+                ?>
+                <div class="row-item row">
+                    <div class="col-md-3">
 
-        <div class="panel-body">
-            <!-- item -->
-            <?php
-                foreach ($category->child_categories as $child) {
-                    ?>
-                    <div class="row-item row">
-                        <h3>
-                            <a href="#"><?= $child->cate_name ?></a> |
-
-                        </h3>
-                        <div class="col-md-12 border-right">
-
-
-                            <div class="col-md-9">
-                                <h3>Project Five</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima,
-                                    inventore voluptatum saepe quos nostrum provident .</p>
-                                <a class="btn btn-primary" href="chitiet.html">View Project <span
-                                            class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-
-                        </div>
-
-                        <div class="break"></div>
+                        <a href="detail.html">
+                            <br>
+                            <img width="200px" height="200px" class="img-responsive" src="image/320x150.png" alt="">
+                        </a>
                     </div>
-                    <?php
-                }
+
+                    <div class="col-md-9">
+                        <h3><?= $value->arc_name ?></h3>
+                        <p></p>
+                        <a class="btn btn-primary"
+                           href="<?= $this->Url->build(['controller' => 'Articles', 'action' => 'view', $value->arc_id]) ?>">View
+                            Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                    <div class="break"></div>
+                </div>
+                <?php
+            }
             ?>
 
-        </div>
+            <!-- Pagination -->
+            <div class="row text-center">
+                <div class="col-lg-12 paginator">
+                    <ul class="pagination">
+                        <li>
+                            <?= $this->Paginator->first('<< ' . __('first')) ?>
+                        </li>
+                        <li>
+                            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                        </li>
+                        <li class="active">
+                            <?= $this->Paginator->numbers() ?>
+                        </li>
+                        <li>
+                            <?= $this->Paginator->next(__('next') . ' >') ?>
+                        </li>
+                        <li>
+                            <?= $this->Paginator->last(__('last') . ' >>') ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+            <?php
+        }else {
+            echo "Không có dữ liệu";
+        }
+        ?>
+
     </div>
 </div>
