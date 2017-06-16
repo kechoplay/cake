@@ -31,7 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?php
         //        echo "<pre>";
         //        print_r($lstCategory);
-        getCategory($lstCategory);
+        getCategory($listCategory);
 
         ?>
 

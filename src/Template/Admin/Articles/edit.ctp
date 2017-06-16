@@ -26,7 +26,7 @@
         <?php
             echo $this->Form->input('arc_name');
             echo $this->Form->input('arc_descript');
-            echo $this->Form->input('cate_id', ['options' => $categories, 'empty' => true]);
+            echo $this->Form->input('cate_id', ['options' => $categories]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

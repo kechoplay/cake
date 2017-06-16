@@ -51,7 +51,6 @@ class CategoriesController extends AppController
      */
     public function add()
     {
-        $category1=$this->Categories->getAll();
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
@@ -68,7 +67,6 @@ class CategoriesController extends AppController
         $categories = $this->Categories->Categories->find('list', ['limit' => 200]);
         $parentCategories = $this->Categories->ParentCategories->find('list', ['limit' => 200]);
         $this->set(compact('category', 'categories', 'parentCategories'));
-        $this->set(compact('category1'));
         $this->set('_serialize', ['category']);
     }
 

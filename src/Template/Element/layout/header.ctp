@@ -29,7 +29,13 @@
                         <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
+                <li>
+
+                </li>
             </ul>
+            <div class="nav navbar-nav">
+
+            </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><?= $this->Html->link(
                         'Login',

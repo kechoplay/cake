@@ -109,8 +109,8 @@ class AppController extends Controller
     {
         $this->Auth->allow(['index','view','display']);
         $tblCategory=TableRegistry::get('Categories');
-        $lstCategory=$tblCategory->find('all')->toArray();
-        $this->set(compact('lstCategory'));
+        $listCategory=$tblCategory->find('all')->toArray();
+        $this->set(compact('listCategory'));
     }
 
     /**
@@ -128,28 +128,28 @@ class AppController extends Controller
         }
     }
 
-    public function getCategory($data,$parent=0)
-    {
-        $cate_chil=array();
-        foreach ($data as $key => $value)
-        {
-            if($value['parent_id']==$parent){
-                $cate_chil[]=$value;
-            }
-        }
-        if ($cate_chil)
-        {
-            foreach ($cate_chil as $keys => $values)
-            {
-                echo "<li class='list-group-item menu1'>";
-                echo "<a href='".Router::url(['controller'=>'Categories','action'=>'view',$values['cate_id']])."'>";
-                echo $values['cate_name'];
-                echo "</a>";
-                echo "</li>";
-                echo "<ul>";
-                getCategory($data,$values['cate_id']);
-                echo "</ul>";
-            }
-        }
-    }
+//    public function getCategory($data,$parent=0)
+//    {
+//        $cate_chil=array();
+//        foreach ($data as $key => $value)
+//        {
+//            if($value['parent_id']==$parent){
+//                $cate_chil[]=$value;
+//            }
+//        }
+//        if ($cate_chil)
+//        {
+//            foreach ($cate_chil as $keys => $values)
+//            {
+//                echo "<li class='list-group-item menu1'>";
+//                echo "<a href='".Router::url(['controller'=>'Categories','action'=>'view',$values['cate_id']])."'>";
+//                echo $values['cate_name'];
+//                echo "</a>";
+//                echo "</li>";
+//                echo "<ul>";
+//                getCategory($data,$values['cate_id']);
+//                echo "</ul>";
+//            }
+//        }
+//    }
 }

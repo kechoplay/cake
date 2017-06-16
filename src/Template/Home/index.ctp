@@ -1,4 +1,3 @@
-
 <style>
     .menu1 ul{
         position: absolute;
@@ -6,4 +5,6 @@
     }
 </style>
 
-
+<select>
+    <option>hêlo</option>
+</select>

@@ -38,6 +38,7 @@ if (!extension_loaded('mbstring')) {
  */
 require __DIR__ . '/paths.php';
 
+//require "../src/Functon/function.php";
 /*
  * Bootstrap CakePHP.
  *

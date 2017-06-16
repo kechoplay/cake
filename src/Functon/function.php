@@ -31,7 +31,7 @@ function getCategory($data,$parent=0)
     }
 }
 
-function lstCategory($data=array(),$parent=0,$str="--")
+function lstCategory($data=array(),$parent=0,$str="--",$select=0)
 {
     foreach ($data as $key => $value)
     {
@@ -39,24 +39,12 @@ function lstCategory($data=array(),$parent=0,$str="--")
         $name=$value['cate_name'];
         if ($value['parent_id']==$parent)
         {
-            echo "<option value='$id'>$str $name</option>";
-            lstCategory($data,$id,$str."--");
-        }
-    }
-}
-
-function cateParent($data,$parent=0,$str="--",$select=0)
-{
-    foreach ($data as $key => $value) {
-        $id=$value[0];
-        $name=$value[1];
-        if($value[2]==$parent){
-            if($select !=0 && $id==$select){
+            if ($select!=0 && $id==$select){
                 echo "<option value='$id' selected='selected'>$str $name</option>";
-            }else{
+            }else {
                 echo "<option value='$id'>$str $name</option>";
             }
-            cateParent($data,$id,$str."--");
+            lstCategory($data,$id,$str."--");
         }
     }
 }
