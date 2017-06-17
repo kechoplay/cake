@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -18,7 +18,7 @@ class BookmarksController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Books', 'Categories']
+            'contain' => ['Categories']
         ];
         $bookmarks = $this->paginate($this->Bookmarks);
 
@@ -36,7 +36,7 @@ class BookmarksController extends AppController
     public function view($id = null)
     {
         $bookmark = $this->Bookmarks->get($id, [
-            'contain' => ['Books', 'Categories', 'Tags']
+            'contain' => ['Categories', 'Tags']
         ]);
 
         $this->set('bookmark', $bookmark);
@@ -60,7 +60,27 @@ class BookmarksController extends AppController
             }
             $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
         }
-        $books = $this->Bookmarks->Books->find('list', ['limit' => 200]);
+        $books = $this->Bookmarks->find('list', ['limit' => 200]);
+        $categories = $this->Bookmarks->Categories->find('list', ['limit' => 200]);
+        $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
+        $this->set(compact('bookmark', 'books', 'categories', 'tags'));
+        $this->set('_serialize', ['bookmark']);
+    }
+
+    public function addCategory($id)
+    {
+        $bookmark = $this->Bookmarks->newEntity();
+        if ($this->request->is('post')) {
+            $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+            $bookmark->cate_id=$id;
+            if ($this->Bookmarks->save($bookmark)) {
+                $this->Flash->success(__('The bookmark has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
+        }
+        $books = $this->Bookmarks->find('list', ['limit' => 200]);
         $categories = $this->Bookmarks->Categories->find('list', ['limit' => 200]);
         $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
         $this->set(compact('bookmark', 'books', 'categories', 'tags'));
@@ -88,7 +108,7 @@ class BookmarksController extends AppController
             }
             $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
         }
-        $books = $this->Bookmarks->Books->find('list', ['limit' => 200]);
+        $books = $this->Bookmarks->find('list', ['limit' => 200]);
         $categories = $this->Bookmarks->Categories->find('list', ['limit' => 200]);
         $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
         $this->set(compact('bookmark', 'books', 'categories', 'tags'));
@@ -113,5 +133,19 @@ class BookmarksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function tags()
+    {
+        $tags = $this->request->getParam('pass');
+
+        $bookmarks = $this->Bookmarks->find('tagged', [
+            'tags' => $tags
+        ]);
+
+        $this->set([
+            'bookmarks' => $bookmarks,
+            'tags' => $tags
+        ]);
     }
 }

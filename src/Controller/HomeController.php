@@ -48,7 +48,7 @@ class HomeController extends AppController
             $search = $article->where(['arc_name like' => "%$articles%"])
                 ->toArray();
         } else {
-            $search = $article->where(['arc_name like' => "%$articles", 'cate_id' => $category])
+            $search = $article->where(['arc_name like' => "%$articles%", 'cate_id' => $category])
                 ->toArray();
         }
         $this->set('search', ($search));

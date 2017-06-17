@@ -31,6 +31,28 @@ use Cake\ORM\Entity;
      */
     protected $_accessible = [
         '*' => true,
-        'book_id' => false
+        'book_id' => false,
+        'cate_id' => true,
+        'book_title' => true,
+        'book_description' => true,
+        'book_url' => true,
+        'user' => true,
+        'tags' => true,
+        'tag_string' => true,
     ];
+
+    protected function _getTagString()
+    {
+        if (isset($this->_properties['tag_string'])) {
+            return $this->_properties['tag_string'];
+        }
+        if (empty($this->tags)) {
+            return '';
+        }
+        $tags = new Collection($this->tags);
+        $str = $tags->reduce(function ($string, $tag) {
+            return $string . $tag->title . ', ';
+        }, '');
+        return trim($str, ', ');
+    }
 }

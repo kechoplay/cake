@@ -41,6 +41,10 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::scope('/bookmarks',['controller'=>'Bookmarks'],function($router){
+   $router->connect('/tagged/*',['action'=>'tags']);
+});
+
 Router::prefix('admin', function (RouteBuilder $routes){
     $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
 

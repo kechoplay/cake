@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -18,7 +18,7 @@ class TagsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tags']
+            'contain' => []
         ];
         $tags = $this->paginate($this->Tags);
 
@@ -36,7 +36,7 @@ class TagsController extends AppController
     public function view($id = null)
     {
         $tag = $this->Tags->get($id, [
-            'contain' => ['Tags', 'Bookmarks']
+            'contain' => ['Bookmarks']
         ]);
 
         $this->set('tag', $tag);
@@ -60,7 +60,7 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
-        $tags = $this->Tags->Tags->find('list', ['limit' => 200]);
+        $tags = $this->Tags->find('list', ['limit' => 200]);
         $bookmarks = $this->Tags->Bookmarks->find('list', ['limit' => 200]);
         $this->set(compact('tag', 'tags', 'bookmarks'));
         $this->set('_serialize', ['tag']);
@@ -87,7 +87,7 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
-        $tags = $this->Tags->Tags->find('list', ['limit' => 200]);
+        $tags = $this->Tags->find('list', ['limit' => 200]);
         $bookmarks = $this->Tags->Bookmarks->find('list', ['limit' => 200]);
         $this->set(compact('tag', 'tags', 'bookmarks'));
         $this->set('_serialize', ['tag']);

@@ -57,6 +57,7 @@ class CategoriesController extends AppController
         $category = $this->Categories->get($id, [
             'contain' => ['ParentCategories', 'ChildCategories']
         ]);
+        $bookmark=TableRegistry::get('Bookmarks');
 
         $this->set('category', $category);
         $this->set('article', $this->paginate($article));

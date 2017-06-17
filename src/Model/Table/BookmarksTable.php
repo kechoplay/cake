@@ -37,7 +37,7 @@ use Cake\Validation\Validator;
         $this->displayField('book_id');
         $this->primaryKey('book_id');
 
-        $this->belongsTo('Books', [
+        $this->belongsTo('Bookmarks', [
             'foreignKey' => 'book_id',
             'joinType' => 'INNER'
         ]);
@@ -82,9 +82,65 @@ use Cake\Validation\Validator;
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['book_id'], 'Books'));
+        $rules->add($rules->existsIn(['book_id'], 'Bookmarks'));
         $rules->add($rules->existsIn(['cate_id'], 'Categories'));
 
         return $rules;
+    }
+
+    public function findTagged(Query $query, array $options)
+    {
+        $bookmarks = $this->find()
+            ->select(['book_id', 'book_url', 'book_title', 'book_description']);
+
+        if (empty($options['tags'])) {
+            $bookmarks
+                ->leftJoinWith('Tags')
+                ->where(['Tags.tag_title IS' => null]);
+        } else {
+            $bookmarks
+                ->innerJoinWith('Tags')
+                ->where(['Tags.tag_title IN ' => $options['tags']]);
+        }
+
+        return $bookmarks->group(['Bookmarks.book_id']);
+    }
+
+    public function beforeSave($event, $entity, $options)
+    {
+        if ($entity->tag_string) {
+            $entity->tags = $this->_buildTags($entity->tag_string);
+        }
+    }
+
+    protected function _buildTags($tagString)
+    {
+        // Trim tags
+        $newTags = array_map('trim', explode(',', $tagString));
+        // Remove all empty tags
+        $newTags = array_filter($newTags);
+        // Reduce duplicated tags
+        $newTags = array_unique($newTags);
+
+        $out = [];
+        $query = $this->Tags->find()
+            ->where(['Tags.tag_title IN' => $newTags]);
+
+        // Remove existing tags from the list of new tags.
+        foreach ($query->extract('tag_title') as $existing) {
+            $index = array_search($existing, $newTags);
+            if ($index !== false) {
+                unset($newTags[$index]);
+            }
+        }
+        // Add existing tags.
+        foreach ($query as $tag) {
+            $out[] = $tag;
+        }
+        // Add new tags.
+        foreach ($newTags as $tag) {
+            $out[] = $this->Tags->newEntity(['tag_title' => $tag]);
+        }
+        return $out;
     }
 }
