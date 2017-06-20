@@ -30,6 +30,7 @@ use Cake\Routing\Router;
  */
 class AppController extends Controller
 {
+    public $id_ses=array();
 
     /**
      * Initialization hook method.
@@ -110,7 +111,9 @@ class AppController extends Controller
         $this->Auth->allow(['index','view','display']);
         $tblCategory=TableRegistry::get('Categories');
         $listCategory=$tblCategory->find('all')->toArray();
+
         $this->set(compact('listCategory'));
+
     }
 
     /**
@@ -128,28 +131,38 @@ class AppController extends Controller
         }
     }
 
-//    public function getCategory($data,$parent=0)
-//    {
-//        $cate_chil=array();
-//        foreach ($data as $key => $value)
-//        {
-//            if($value['parent_id']==$parent){
-//                $cate_chil[]=$value;
-//            }
-//        }
-//        if ($cate_chil)
-//        {
-//            foreach ($cate_chil as $keys => $values)
-//            {
-//                echo "<li class='list-group-item menu1'>";
-//                echo "<a href='".Router::url(['controller'=>'Categories','action'=>'view',$values['cate_id']])."'>";
-//                echo $values['cate_name'];
-//                echo "</a>";
-//                echo "</li>";
-//                echo "<ul>";
-//                getCategory($data,$values['cate_id']);
-//                echo "</ul>";
-//            }
-//        }
-//    }
+    public function getCategory($data,$parent=0)
+    {
+        $cate_chil=array();
+        foreach ($data as $key => $value)
+        {
+            if($value['parent_id']==$parent){
+                $cate_chil[]=$value;
+            }
+        }
+        if ($cate_chil)
+        {
+            foreach ($cate_chil as $keys => $values)
+            {
+                echo "<li class='list-group-item menu1'>";
+                echo "<a href='".Router::url(['controller'=>'Categories','action'=>'view',$values['cate_id']])."'>";
+                echo $values['cate_name'];
+                echo "</a>";
+                echo "</li>";
+                echo "<ul>";
+                getCategory($data,$values['cate_id']);
+                echo "</ul>";
+            }
+        }
+    }
+
+    public function setSession($id){
+        $session=$this->request->session();
+        $session->write('id',$id);
+    }
+
+    public function getSession($id){
+        $session=$this->request->session();
+        return $session->read($id);
+    }
 }

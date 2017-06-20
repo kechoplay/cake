@@ -7,7 +7,11 @@
         border-bottom: 1px solid #EEEEEE;
     }
 </style>
-
+<?php
+echo "<pre>";
+print_r($save);
+echo "</pre>";
+?>
 <div class="col-lg-9">
 
     <h1><?=$article->arc_name?></h1>

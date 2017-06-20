@@ -19,20 +19,36 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <html>
 <head>
     <?= $this->Html->charset() ?>
-   <?php echo $this->element('head') ?>
+    <?php echo $this->element('head') ?>
 </head>
 <body>
+<?php
+//echo "<pre>";
+//print_r($categoryId);
+//echo "</pre>";
+//die;
+if (isset($categoryId)) {
+//    echo $categoryId;
+    foreach ($categoryId as $id) {
+        echo "<script type='text/javascript'>
+$(document).ready(function() {
+//    console.log('haha');
+$('#menuchild" . $id . "').css('color','black');
+$('#menuchild" . $id . "').parent().css('display','block');
+});
+</script>";
+    }
+}
+?>
 <?php echo $this->element('layout/header') ?>
+
 <div class="col-md-3 ">
     <ul class="list-group" id="menu">
         <li href="#" class="list-group-item menu1 active">
             Menu
         </li>
         <?php
-        //        echo "<pre>";
-        //        print_r($lstCategory);
         getCategory($listCategory);
-
         ?>
 
     </ul>
@@ -42,7 +58,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <script>
     $(".menu1").next('ul').toggle();
 
-    $(".menu1").click(function(event) {
+    $(".menu1").click(function (event) {
         $(this).next("ul").toggle(500);
     });
 </script>

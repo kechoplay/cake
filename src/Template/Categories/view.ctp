@@ -7,7 +7,9 @@
         border-bottom: 1px solid #EEEEEE;
     }
 </style>
-
+<?php
+//var_dump($read);
+?>
 <div class="col-md-9 ">
     <div class="panel panel-default">
         <div class="panel-heading" style="background-color:#337AB7; color:white;">
@@ -22,16 +24,17 @@
 
                         <a href="detail.html">
                             <br>
-                            <img width="200px" height="200px" class="img-responsive" src="image/320x150.png" alt="">
+                            <img width="200px" height="200px" class="img-responsive" src="" alt="">
                         </a>
                     </div>
 
                     <div class="col-md-9">
-                        <h3><?= $value->arc_name ?></h3>
+                        <h3 style="color:<?=(in_array($value->arc_id,$read)) ? 'gray' : 'black'?>"><?= $value->arc_name ?></h3>
                         <p></p>
-                        <a class="btn btn-primary"
+                        <a class="btn btn-primary" onclick="return setSession(<?=$value->arc_id?>);"
                            href="<?= $this->Url->build(['controller' => 'Articles', 'action' => 'view', $value->arc_id]) ?>">View
                             Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+
                     </div>
                     <div class="break"></div>
                 </div>
@@ -70,3 +73,11 @@
 
     </div>
 </div>
+
+<script>
+    function setSession($id) {
+        $.ajax({
+
+        });
+    }
+</script>

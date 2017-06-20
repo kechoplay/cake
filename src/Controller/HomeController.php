@@ -53,6 +53,27 @@ class HomeController extends AppController
         }
         $this->set('search', ($search));
     }
+
+    public function search()
+    {
+        $this->_articleTbl = TableRegistry::get('articles');
+        $article = $this->_articleTbl->find('all');
+        if ($this->request->is('post')) {
+            $category = $this->request->data('cate_id');
+            $articles = $this->request->data('arc_name');
+//echo $articles;
+//die;
+            if ($article == '') {
+                $search = $article->where(['cate_id' => $category])->toArray();
+            } elseif ($category == 0) {
+                $search = $article->where(['arc_name like' => "%$articles%"])
+                    ->toArray();
+            } else {
+                $search = $article->where(['arc_name like' => "%$articles%", 'cate_id' => $category])
+                    ->toArray();
+            }
+        }
+    }
 }
 
 ?>
