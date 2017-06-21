@@ -36,22 +36,22 @@ class HomeController extends AppController
 
     public function index()
     {
-        $this->_articleTbl = TableRegistry::get('articles');
-        $article = $this->_articleTbl->find('all');
-        $category = $this->request->getQuery('cate_id');
-        $articles = $this->request->getQuery('arc_name');
-//echo $articles;
-//die;
-        if ($article == '') {
-            $search=$article->where(['cate_id'=>$category])->toArray();
-        } elseif ($category == 0) {
-            $search = $article->where(['arc_name like' => "%$articles%"])
-                ->toArray();
-        } else {
-            $search = $article->where(['arc_name like' => "%$articles%", 'cate_id' => $category])
-                ->toArray();
-        }
-        $this->set('search', ($search));
+//        $this->_articleTbl = TableRegistry::get('articles');
+//        $article = $this->_articleTbl->find('all');
+//        $category = $this->request->getQuery('cate_id');
+//        $articles = $this->request->getQuery('arc_name');
+////echo $articles;
+////die;
+//        if ($article == '') {
+//            $search=$article->where(['cate_id'=>$category])->toArray();
+//        } elseif ($category == 0) {
+//            $search = $article->where(['arc_name like' => "%$articles%"])
+//                ->toArray();
+//        } else {
+//            $search = $article->where(['arc_name like' => "%$articles%", 'cate_id' => $category])
+//                ->toArray();
+//        }
+//        $this->set('search', ($search));
     }
 
     public function search()
@@ -72,6 +72,15 @@ class HomeController extends AppController
                 $search = $article->where(['arc_name like' => "%$articles%", 'cate_id' => $category])
                     ->toArray();
             }
+            $return=array();
+            foreach ($search as $val){
+                $return[] = array(
+                    'id'=>$val['arc_id'],
+                    'name'=>$val['arc_name']
+                );
+            }
+            echo json_encode($return);
+            exit();
         }
     }
 }

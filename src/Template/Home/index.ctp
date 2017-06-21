@@ -21,59 +21,48 @@
                 <input type="text" name="arc_name" id="input" class="form-control" value="">
             </div>
             <div class="col-md-4">
-                <button type="submit" id="submit" class="btn btn-default">Search</button>
+                <button type="button" id="submit" class="btn btn-default">Search</button>
             </div>
         </form>
     </div>
     <br>
-    <div class="col-md-12" style="margin-top: 20px;" id="search">
+    <div class="col-md-12" style="margin-top: 20px;display: none" id="search">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                <h4><b>Tin tức</b></h4>
-            </div>
-            <?php
-            if (isset($search)) {
-                foreach ($search as $value) {
-                    ?>
-                    <div class="row-item row">
-                        <div class="col-md-3">
-
-                            <a href="">
-                                <br>
-                                <img width="200px" height="200px" class="img-responsive" src="image/320x150.png" alt="">
-                            </a>
-                        </div>
-
-                        <div class="col-md-9">
-                            <h3><?= $value->arc_name ?></h3>
-                            <p></p>
-                            <a class="btn btn-primary"
-                               href="<?= $this->Url->build(['controller' => 'Articles', 'action' => 'view', $value->arc_id]) ?>">View
-                                Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        </div>
-                        <div class="break"></div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
 
         </div>
     </div>
 </div>
 
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--       $('#submit').click(function () {-->
-<!--          $.ajax({-->
-<!--              type: 'post',-->
-<!--              url: 'home/search',-->
-<!--              data :$('#form-search').serialize(),-->
-<!--              success: function (data) {-->
-<!--//                  $('#search').style('display','block');-->
-<!--                    $('#search').html(data);-->
-<!--              }-->
-<!--          });-->
-<!--       });-->
-<!--    });-->
-<!--</script>-->
+<script>
+    $(document).ready(function () {
+        $('#submit').click(function () {
+            $.ajax({
+                type: 'post',
+                url: 'home/search',
+                data: $('#form-search').serialize(),
+                success: function (data) {
+                    $('#search').css('display','block');
+                    var result = JSON.parse(data);
+                    console.log(result);
+                    $('.panel').html(function () {
+                        var html = "<div class='panel-heading' style='background-color:#337AB7; color:white;'><h4><b>Tin tức</b></h4></div>";
+                        $.each(result, function (key, value) {
+                            html += "<div class='row-item row'>";
+                            html += "<div class='col-md-3'>";
+                            html += "</div>";
+                            html += "<div class='col-md-9'>";
+                            html += "<h3>" + value.name + "</h3>";
+                            html += "<a class='btn btn-primary' href='articles/view/"+value.id+"'>";
+                            html += "View Project <span class='glyphicon glyphicon-chevron-right'></span></a>";
+                            html += "</div>";
+                            html += "<div class='break'></div>";
+                            html += "</div>";
+                        });
+
+                        return html;
+                    });
+                }
+            });
+        });
+    });
+</script>
