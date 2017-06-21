@@ -1,14 +1,14 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Controller\AppController;
+use App\Controller\Admin\AdminController;
 
 /**
  * Articles Controller
  *
  * @property \App\Model\Table\ArticlesTable $Articles
  */
-class ArticlesController extends AppController
+class ArticlesController extends AdminController
 {
     public function initialize()
     {

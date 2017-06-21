@@ -12,6 +12,7 @@
  * @since     0.2.9
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -30,7 +31,7 @@ use Cake\Routing\Router;
  */
 class AppController extends Controller
 {
-    public $id_ses=array();
+    public $id_ses = array();
 
     /**
      * Initialization hook method.
@@ -45,50 +46,34 @@ class AppController extends Controller
     {
         parent::initialize();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix']!='admin'){
+        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix'] != 'admin') {
             $this->viewBuilder()->setLayout('default2');
-        }else {
+        } else {
             $this->viewBuilder()->setLayout('default');
         }
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Paginator');
-        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix']!='admin') {
-            $this->loadComponent('Auth', [
-                'authenticate' => [
-                    'Form' => [
-                        'fields' => [
-                            'username' => 'username',
-                            'password' => 'password'
-                        ],
-                        'userModel' => 'Users'
-                    ]
-                ],
-                'loginAction' => array('controller' => 'Users', 'action' => 'login'),
-                'loginRedirect' => array('controller' => 'Admin/Users', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
-            ]);
-        }else{
-            $this->loadComponent('Auth', [
-                'authenticate' => [
-                    'Form' => [
-                        'fields' => [
-                            'username' => 'username',
-                            'password' => 'password'
-                        ],
-                        'userModel' => 'Users'
-                    ]
-                ],
-//                'loginAction' => array('controller' => 'Admin/Users', 'action' => 'login'),
-                'loginRedirect' => array('controller' => 'Users', 'action' => 'index'),
-                'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
-            ]);
-        }
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'username',
+                        'password' => 'password'
+                    ],
+                    'userModel' => 'Users'
+                ]
+            ],
+            'loginAction' => array('controller' => 'Users', 'action' => 'login'),
+            'loginRedirect' => array('prefix'=>'admin','controller' => 'Admin/Users', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
+        ]);
 
-        $redirect_url=$this->request->here;
-        $arr=explode('/',$redirect_url);
-        $this->set('module',$arr[1]);
+
+        $redirect_url = $this->request->here;
+        $arr = explode('/', $redirect_url);
+        $this->set('module', $arr[1]);
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -100,7 +85,7 @@ class AppController extends Controller
 
     public function isAuthorized($user)
     {
-        if(isset($user['status']) && $user['status']===1){
+        if (isset($user['status']) && $user['status'] === 1) {
             return true;
         }
         return false;
@@ -108,9 +93,9 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index','view','display']);
-        $tblCategory=TableRegistry::get('Categories');
-        $listCategory=$tblCategory->find('all')->toArray();
+        $this->Auth->allow(['index', 'view', 'display']);
+        $tblCategory = TableRegistry::get('Categories');
+        $listCategory = $tblCategory->find('all')->toArray();
 
         $this->set(compact('listCategory'));
 
@@ -131,38 +116,37 @@ class AppController extends Controller
         }
     }
 
-    public function getCategory($data,$parent=0)
+    public function getCategory($data, $parent = 0)
     {
-        $cate_chil=array();
-        foreach ($data as $key => $value)
-        {
-            if($value['parent_id']==$parent){
-                $cate_chil[]=$value;
+        $cate_chil = array();
+        foreach ($data as $key => $value) {
+            if ($value['parent_id'] == $parent) {
+                $cate_chil[] = $value;
             }
         }
-        if ($cate_chil)
-        {
-            foreach ($cate_chil as $keys => $values)
-            {
+        if ($cate_chil) {
+            foreach ($cate_chil as $keys => $values) {
                 echo "<li class='list-group-item menu1'>";
-                echo "<a href='".Router::url(['controller'=>'Categories','action'=>'view',$values['cate_id']])."'>";
+                echo "<a href='" . Router::url(['controller' => 'Categories', 'action' => 'view', $values['cate_id']]) . "'>";
                 echo $values['cate_name'];
                 echo "</a>";
                 echo "</li>";
                 echo "<ul>";
-                getCategory($data,$values['cate_id']);
+                getCategory($data, $values['cate_id']);
                 echo "</ul>";
             }
         }
     }
 
-    public function setSession($id){
-        $session=$this->request->session();
-        $session->write('id',$id);
+    public function setSession($id)
+    {
+        $session = $this->request->session();
+        $session->write('id', $id);
     }
 
-    public function getSession($id){
-        $session=$this->request->session();
+    public function getSession($id)
+    {
+        $session = $this->request->session();
         return $session->read($id);
     }
 }

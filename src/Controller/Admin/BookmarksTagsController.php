@@ -7,7 +7,7 @@ use App\Controller\AppController;
  * BookmarksTags Controller
  *
  * @property \App\Model\Table\BookmarksTagsTable $BookmarksTags */
-class BookmarksTagsController extends AppController
+class BookmarksTagsController extends AdminController
 {
 
     /**

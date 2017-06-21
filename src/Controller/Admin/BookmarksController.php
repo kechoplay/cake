@@ -1,13 +1,13 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Controller\AppController;
+use App\Controller\Admin\AdminController;
 
 /**
  * Bookmarks Controller
  *
  * @property \App\Model\Table\BookmarksTable $Bookmarks */
-class BookmarksController extends AppController
+class BookmarksController extends AdminController
 {
 
     /**

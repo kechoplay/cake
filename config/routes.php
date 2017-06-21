@@ -32,24 +32,31 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Home', 'action' => 'index' , 'home']);
+    $routes->connect('/', ['controller' => 'Home', 'action' => 'index', 'home']);
     $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+//    $routes->connect('/admin', ['controller' => 'Users', 'action' => 'login']);
 
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-
     $routes->fallbacks(DashedRoute::class);
+
 });
 
-Router::scope('/bookmarks',['controller'=>'Bookmarks'],function($router){
-   $router->connect('/tagged/*',['action'=>'tags']);
-});
-
-Router::prefix('admin', function (RouteBuilder $routes){
+Router::prefix('admin', function ($routes) {
     $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+//    $routes->connect('/users/add', ['controller' => 'Users', 'action' => 'add']);
+//    $routes->connect('/users', ['controller' => 'Users', 'action' => 'index']);
+//    $routes->connect('/categories', ['controller' => 'Categories', 'action' => 'index']);
+//    $routes->connect('/categories/add', ['controller' => 'Categories', 'action' => 'add']);
+//    $routes->connect('/articles', ['controller' => 'Articles', 'action' => 'view']);
+//    $routes->connect('/articles/add', ['controller' => 'Articles', 'action' => 'add']);
 
 
     $routes->fallbacks(DashedRoute::class);
+});
+
+Router::scope('/bookmarks', ['controller' => 'Bookmarks'], function ($router) {
+    $router->connect('/tagged/*', ['action' => 'tags']);
 });
 
 

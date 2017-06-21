@@ -26,10 +26,13 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('login_admin');
         if($this->request->is('post')){
             $user = $this->Auth->identify();
-
             if($user){
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                if ($user['status']==1) {
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                }else{
+                    $this->Flash->error(__('Account is not active'),['key'=>'auth']);
+                }
             } else
                 $this->Flash->error(__('Your username or password is incorrect.'), ['key'=>'auth']);
         }
