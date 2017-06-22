@@ -13,7 +13,7 @@
 <div class="col-md-9 ">
     <div class="panel panel-default">
         <div class="panel-heading" style="background-color:#337AB7; color:white;">
-            <h4><b><?=$category->cate_name?></b></h4>
+            <h4><b><?= $category->cate_name ?></b></h4>
         </div>
         <?php
         if (!empty($article)) {
@@ -29,9 +29,16 @@
                     </div>
 
                     <div class="col-md-9">
-                        <h3 style="color:<?=(in_array($value->arc_id,$read)) ? 'gray' : 'black'?>"><?= $value->arc_name ?></h3>
+                        <h3 style="color:<?php
+                        if (isset($read)) {
+                            if (in_array($value->arc_id, $read)) {
+                                echo 'red';
+                            } else {
+                                echo 'black';
+                            }
+                        } ?>"><?= $value->arc_name ?></h3>
                         <p></p>
-                        <a class="btn btn-primary" onclick="return setSession(<?=$value->arc_id?>);"
+                        <a class="btn btn-primary" onclick="return setSession(<?= $value->arc_id ?>);"
                            href="<?= $this->Url->build(['controller' => 'Articles', 'action' => 'view', $value->arc_id]) ?>">View
                             Project <span class="glyphicon glyphicon-chevron-right"></span></a>
 
@@ -66,7 +73,7 @@
             </div>
             <!-- /.row -->
             <?php
-        }else {
+        } else {
             echo "Không có dữ liệu";
         }
         ?>
@@ -76,8 +83,6 @@
 
 <script>
     function setSession($id) {
-        $.ajax({
-
-        });
+        $.ajax({});
     }
 </script>

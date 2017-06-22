@@ -76,9 +76,9 @@ class CategoriesController extends AppController
         }
         if ($session->check('id')){
             $read=$session->read('id');
+            $this->set('read', $read);
         }
         $this->set('categoryId', $arr_id);
-        $this->set('read', $read);
         $this->set('category', $category);
         $this->set('article', $this->paginate($article));
         $this->set('_serialize', ['article']);
