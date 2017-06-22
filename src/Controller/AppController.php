@@ -46,11 +46,11 @@ class AppController extends Controller
     {
         parent::initialize();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix'] != 'admin') {
+//        if (!(isset($this->request->params['prefix'])) || $this->request->params['prefix'] != 'admin') {
             $this->viewBuilder()->setLayout('default2');
-        } else {
-            $this->viewBuilder()->setLayout('default');
-        }
+//        } else {
+//            $this->viewBuilder()->setLayout('default');
+//        }
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
@@ -93,7 +93,7 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'view', 'display']);
+        $this->Auth->allow(['index', 'view', 'display','search']);
         $tblCategory = TableRegistry::get('Categories');
         $listCategory = $tblCategory->find('all')->toArray();
 
