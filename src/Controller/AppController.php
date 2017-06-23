@@ -31,7 +31,6 @@ use Cake\Routing\Router;
  */
 class AppController extends Controller
 {
-    public $id_ses = array();
 
     /**
      * Initialization hook method.
@@ -60,7 +59,8 @@ class AppController extends Controller
                 'Form' => [
                     'fields' => [
                         'username' => 'username',
-                        'password' => 'password'
+                        'password' => 'password',
+                        'status' => 1
                     ],
                     'userModel' => 'Users'
                 ]
@@ -70,15 +70,6 @@ class AppController extends Controller
             'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
         ]);
 
-
-        $redirect_url = $this->request->here;
-        $arr = explode('/', $redirect_url);
-        $this->set('module', $arr[1]);
-
-        /*
-         * Enable the following components for recommended CakePHP security settings.
-         * see http://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
@@ -116,37 +107,4 @@ class AppController extends Controller
         }
     }
 
-    public function getCategory($data, $parent = 0)
-    {
-        $cate_chil = array();
-        foreach ($data as $key => $value) {
-            if ($value['parent_id'] == $parent) {
-                $cate_chil[] = $value;
-            }
-        }
-        if ($cate_chil) {
-            foreach ($cate_chil as $keys => $values) {
-                echo "<li class='list-group-item menu1'>";
-                echo "<a href='" . Router::url(['controller' => 'Categories', 'action' => 'view', $values['cate_id']]) . "'>";
-                echo $values['cate_name'];
-                echo "</a>";
-                echo "</li>";
-                echo "<ul>";
-                getCategory($data, $values['cate_id']);
-                echo "</ul>";
-            }
-        }
-    }
-
-    public function setSession($id)
-    {
-        $session = $this->request->session();
-        $session->write('id', $id);
-    }
-
-    public function getSession($id)
-    {
-        $session = $this->request->session();
-        return $session->read($id);
-    }
 }

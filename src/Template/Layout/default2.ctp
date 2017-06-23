@@ -28,15 +28,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 //echo "</pre>";
 //die;
 if (isset($categoryId)) {
-//    echo $categoryId;
     foreach ($categoryId as $id) {
         echo "<script type='text/javascript'>
-$(document).ready(function() {
-//    console.log('haha');
-$('#menuchild" . $id . "').css('color','black');
-$('#menuchild" . $id . "').parent().css('display','block');
-});
-</script>";
+                   $(document).ready(function() {
+                        $('#menuchild" . $id . "').css('color','black');
+                        $('#menuchild" . $id . "').parent().parent().css('display','block');
+                    });
+              </script>";
     }
 }
 ?>
@@ -48,7 +46,6 @@ $('#menuchild" . $id . "').parent().css('display','block');
             Menu
         </li>
         <?php
-//        getCategory($listCategory);
         $this->Categories->getCategory($listCategory);
         ?>
 

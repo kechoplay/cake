@@ -1,9 +1,4 @@
-<style>
-    .menu1 ul {
-        position: absolute;
-        z-index: 999;
-    }
-</style>
+<!---->
 <div class="col-md-9">
     <div class="col-md-12">
         <form action="" method="" role="form" id="form-search">

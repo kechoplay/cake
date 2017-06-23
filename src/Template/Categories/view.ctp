@@ -1,12 +1,4 @@
-<style>
-    .break {
-        clear: both;
-        height: 10px;
-        width: 90%;
-        margin: auto;
-        border-bottom: 1px solid #EEEEEE;
-    }
-</style>
+
 <?php
 //var_dump($read);
 ?>
@@ -38,7 +30,7 @@
                             }
                         } ?>"><?= $value->arc_name ?></h3>
                         <p></p>
-                        <a class="btn btn-primary" onclick="return setSession(<?= $value->arc_id ?>);"
+                        <a class="btn btn-primary"
                            href="<?= $this->Url->build(['controller' => 'Articles', 'action' => 'view', $value->arc_id]) ?>">View
                             Project <span class="glyphicon glyphicon-chevron-right"></span></a>
 
@@ -80,9 +72,3 @@
 
     </div>
 </div>
-
-<script>
-    function setSession($id) {
-        $.ajax({});
-    }
-</script>

@@ -31,7 +31,6 @@ use Cake\Routing\Router;
  */
 class AdminController extends Controller
 {
-    public $id_ses = array();
 
     /**
      * Initialization hook method.
@@ -72,14 +71,6 @@ class AdminController extends Controller
             'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
         ]);
 
-        $redirect_url = $this->request->here;
-        $arr = explode('/', $redirect_url);
-        $this->set('module', $arr[1]);
-
-        /*
-         * Enable the following components for recommended CakePHP security settings.
-         * see http://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
