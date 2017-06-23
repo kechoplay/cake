@@ -48,7 +48,8 @@ $('#menuchild" . $id . "').parent().css('display','block');
             Menu
         </li>
         <?php
-        getCategory($listCategory);
+//        getCategory($listCategory);
+        $this->Categories->getCategory($listCategory);
         ?>
 
     </ul>

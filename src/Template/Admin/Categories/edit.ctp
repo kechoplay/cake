@@ -22,12 +22,6 @@
     <fieldset>
         <legend><?= __('Edit Category') ?></legend>
 
-<!--        <select name="cate_id">-->
-<!--            <option value="0">Vui lòng chọn danh mục</option>-->
-<!--            --><?php
-////            lstCategory($listCategory,0,"--",$category->cate_id);
-//            ?>
-<!--        </select>-->
         <?php
             echo $this->Form->input('parent_id', ['options' => $parentCategories, 'empty' => true]);
             echo $this->Form->input('lft');

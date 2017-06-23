@@ -66,7 +66,7 @@ class AppController extends Controller
                 ]
             ],
             'loginAction' => array('controller' => 'Users', 'action' => 'login'),
-            'loginRedirect' => array('prefix'=>'admin','controller' => 'Admin/Users', 'action' => 'index'),
+            'loginRedirect' => array('prefix'=>'admin','controller' => 'Users', 'action' => 'index'),
             'logoutRedirect' => array('controller' => '../Home', 'action' => 'index'),
         ]);
 

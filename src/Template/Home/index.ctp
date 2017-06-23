@@ -41,7 +41,7 @@
                 url: 'home/search',
                 data: $('#form-search').serialize(),
                 success: function (data) {
-                    $('#search').css('display','block');
+                    $('#search').css('display', 'block');
                     var result = JSON.parse(data);
                     console.log(result);
                     $('.panel').html(function () {
@@ -52,13 +52,12 @@
                             html += "</div>";
                             html += "<div class='col-md-9'>";
                             html += "<h3>" + value.name + "</h3>";
-                            html += "<a class='btn btn-primary' href='articles/view/"+value.id+"'>";
+                            html += "<a class='btn btn-primary' href='articles/view/" + value.id + "'>";
                             html += "View Project <span class='glyphicon glyphicon-chevron-right'></span></a>";
                             html += "</div>";
                             html += "<div class='break'></div>";
                             html += "</div>";
                         });
-
                         return html;
                     });
                 }
