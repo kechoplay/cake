@@ -38,20 +38,21 @@ class CategoriesController extends AppController
         ])->find('all')->where(['cate_id' => $id]);
         $category = $this->Categories->get($id);
 
-        if($session->check('idcate')==true) {
-            $session->write('idcate', $id);
-            $idss = $session->read('idcate');
-            array_push($arr_id,$idss);
-        }else{
-            $session->write('idcate', $id);
-            $idss = $session->read('idcate');
-            $arr_id[]=$idss;
-        }
+//        if($session->check('idcate')==true) {
+//            $session->write('idcate', $id);
+//            $idss = $session->read('idcate');
+//            array_push($arr_id,$idss);
+//        }else{
+//            $session->write('idcate', $id);
+//            $idss = $session->read('idcate');
+//            $arr_id[]=$idss;
+//        }
+
         if ($session->check('id')){
             $read=$session->read('id');
             $this->set('read', $read);
         }
-        $this->set('categoryId', $arr_id);
+        $this->set('categoryId', $id);
         $this->set('category', $category);
         $this->set('article', $this->paginate($article));
         $this->set('_serialize', ['article']);

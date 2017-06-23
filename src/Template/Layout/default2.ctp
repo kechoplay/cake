@@ -28,14 +28,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 //echo "</pre>";
 //die;
 if (isset($categoryId)) {
-    foreach ($categoryId as $id) {
-        echo "<script type='text/javascript'>
-                   $(document).ready(function() {
-                        $('#menuchild" . $id . "').css('color','black');
-                        $('#menuchild" . $id . "').parent().parent().css('display','block');
-                    });
-              </script>";
-    }
+    echo "<script type='text/javascript'>
+        $(document).ready(function() {
+            $('#menuchild" . $categoryId . "').css('color','black');
+            $('#menuchild" . $categoryId . "').parent().parent().css('display','block');
+        });
+        </script>";
 }
 ?>
 <?php echo $this->element('layout/header') ?>
