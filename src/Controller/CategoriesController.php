@@ -31,7 +31,6 @@ class CategoriesController extends AppController
 
     public function view($id = null)
     {
-        $arr_id=array();
         $session = $this->request->session();
         $article = TableRegistry::get('Articles', [
             'contain' => ['Categories']
